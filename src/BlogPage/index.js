@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { blogData } from '../blogData'
 
 function BlogPage () {
@@ -10,11 +10,13 @@ function BlogPage () {
             <ul>
                 { blogData.map(post => (
                     <BlogLink 
-                        key={ post.slug }
-                        post={ post }
+                    key={ post.slug }
+                    post={ post }
                     />
-                )) }
+                    )) }
             </ul>
+
+            <Outlet /> 
         </>
     )
 }
