@@ -5,7 +5,11 @@ function ProfilePage () {
     const auth = useAuth()
 
     return (
-        <h1>Welcome, { auth.user.username }</h1>
+        <>
+            <h1>Profile</h1>
+
+            <p>Welcome, { auth.user?.username }</p>
+        </>
     )
 }
 

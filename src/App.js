@@ -7,6 +7,7 @@ import { LoginPage } from '../src/LoginPage'
 import { LogoutPage } from '../src/LogoutPage'
 import { ProfilePage } from './ProfilePage'
 import { BlogPost } from './BlogPost'
+import { AuthRoute } from './auth'
 
 function App() {
   return (
@@ -23,8 +24,24 @@ function App() {
             </Route>
 
             <Route path='/login' element={ <LoginPage />} />
-            <Route path='/logout' element={ <LogoutPage />} />
-            <Route path='/profile' element={ <ProfilePage />} />
+
+            <Route 
+              path='/logout'
+              element={ 
+                <AuthRoute>
+                  <LogoutPage />
+                </AuthRoute>
+              }
+            />
+            
+            <Route 
+              path='/profile'
+              element={ 
+                <AuthRoute>
+                  <ProfilePage />
+                </AuthRoute>
+              }
+            />
             
             // * Simboliza todas las rutas que no se han definido aún y podemos mostrar un error o algo por el estilo
             <Route path='/*' element={ <h1>Página No Encontrada 😰</h1> } />
