@@ -1,7 +1,10 @@
 import { HashRouter, Routes, Route} from 'react-router-dom'
 import { Menu } from './Menu'
+import { AuthProvider } from './auth'
 import { HomePage } from './HomePage'
 import { BlogPage } from './BlogPage'
+import { LoginPage } from '../src/LoginPage'
+import { LogoutPage } from '../src/LogoutPage'
 import { ProfilePage } from './ProfilePage'
 import { BlogPost } from './BlogPost'
 
@@ -9,20 +12,24 @@ function App() {
   return (
     <>
       <HashRouter>
-        <Menu />
+        <AuthProvider>
+          <Menu />
 
-        <Routes>
-          <Route path='/' element={ <HomePage />} />
+          <Routes>
+            <Route path='/' element={ <HomePage />} />
 
-          <Route path='/blog' element={ <BlogPage />}>          
-            <Route path=':slug' element={ <BlogPost />} />
-          </Route>
+            <Route path='/blog' element={ <BlogPage />}>          
+              <Route path=':slug' element={ <BlogPost />} />
+            </Route>
 
-          <Route path='/profile' element={ <ProfilePage />} />
-          
-          // * Simboliza todas las rutas que no se han definido aún y podemos mostrar un error o algo por el estilo
-          <Route path='/*' element={ <h1>Página No Encontrada 😰</h1> } />
-        </Routes>
+            <Route path='/login' element={ <LoginPage />} />
+            <Route path='/logout' element={ <LogoutPage />} />
+            <Route path='/profile' element={ <ProfilePage />} />
+            
+            // * Simboliza todas las rutas que no se han definido aún y podemos mostrar un error o algo por el estilo
+            <Route path='/*' element={ <h1>Página No Encontrada 😰</h1> } />
+          </Routes>
+        </AuthProvider>
       </HashRouter>
     </>
   );
