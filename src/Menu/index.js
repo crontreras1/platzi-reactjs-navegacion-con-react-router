@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useAuth } from '../auth'
 
 const Menu = () => {
+    const auth = useAuth()
+
     return (
         // <nav>
         //     <ul>
@@ -58,20 +61,25 @@ const Menu = () => {
 
         <nav>
             <ul>
-                { routes.map(route => (
-                    <li
-                        key={ route.to }
-                    >
-                        <NavLink
-                            style={({ isActive }) => ({
-                                color: isActive ? 'yellow' : 'black'
-                            })}
-                            to={ route.to }
+                { routes.map(route => {
+                    if (route.private && !auth.user) return null
+                    if (route.text === 'Login' && auth.user) return null
+
+                    return (
+                        <li
+                            key={ route.to }
                         >
-                            { route.text }
-                        </NavLink>
-                    </li>
-                ))}
+                            <NavLink
+                                style={({ isActive }) => ({
+                                    color: isActive ? 'yellow' : 'black'
+                                })}
+                                to={ route.to }
+                            >
+                                { route.text }
+                            </NavLink>
+                        </li>
+                    )
+                })}
             </ul>
         </nav>
     )
@@ -81,27 +89,32 @@ const routes = []
 
 routes.push({
     to: '/',
-    text: 'Home'
+    text: 'Home',
+    private: false
 })
 
 routes.push({
     to: '/blog',
-    text: 'Blog'
+    text: 'Blog',
+    private: false
 })
 
 routes.push({
     to: '/profile',
-    text: 'Profile'
+    text: 'Profile',
+    private: true
 })
 
 routes.push({
     to: '/login',
-    text: 'Login'
+    text: 'Login',
+    private: false
 })
 
 routes.push({
     to: '/logout',
-    text: 'Logout'
+    text: 'Logout',
+    private: true
 })
 
 export { Menu }
