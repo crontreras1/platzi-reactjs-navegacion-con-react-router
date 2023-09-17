@@ -18,7 +18,7 @@ blogData.push({
     title: '¿Qué es Angular',
     slug: 'que-es-angular',
     content: 'Angular en el mejor framework de JS (?) Guiño Guiño',
-    author: 'crontreras1'
+    author: 'paquita'
 })
 
 export { blogData }
